@@ -3,8 +3,11 @@ package com.spring.golub.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import com.spring.golub.dto.UserRegistrationDTO;
+import com.spring.golub.exceptions.IllegalEmailException;
 
 @Slf4j
 @ControllerAdvice
@@ -24,6 +27,14 @@ public class ErrorController {
     @ExceptionHandler(IllegalArgumentException.class)
     public String handleIllegalArgumentException(IllegalArgumentException ex) {
         return ERROR_PAGE;
+    }
+
+    @ExceptionHandler(IllegalEmailException.class)
+    public String handleIllegalEmailException(IllegalEmailException ex,
+                                              Model model) {
+        model.addAttribute("error", "email");
+        model.addAttribute("user", new UserRegistrationDTO());
+        return "registration_page/registration_form.html";
     }
     
 

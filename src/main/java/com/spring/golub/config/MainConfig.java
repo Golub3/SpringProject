@@ -15,7 +15,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 import java.util.Locale;
 
@@ -67,11 +66,6 @@ public class MainConfig implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/static/**")
                 .addResourceLocations("/static/");
-    }
-
-    @Bean
-    public SpringSecurityDialect springSecurityDialect() {
-        return new SpringSecurityDialect();
     }
 
 }
