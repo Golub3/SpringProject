@@ -25,6 +25,9 @@ public class APIUserController {
     @GetMapping()
     public UsersDTO getAllUsers(@RequestParam(name = "limit") Optional<Integer> limit,
                                 @RequestParam(name = "page") Optional<Integer> page) {
+//        UsersDTO users = userService.getAllUsers(limit.orElse(10), page.orElse(1));
+//        log.info("{}", users);
+//        return users;
         return null;
     }
 }
