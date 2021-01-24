@@ -1,8 +1,11 @@
 package com.spring.golub.entity;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -23,12 +26,15 @@ public class Schedule {
     private Long id;
 
     @Column(name = "time_start", nullable = false)
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime time_start;
 
     @Column(name = "time_end", nullable = false)
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime time_end;
 
     @Column(name = "date", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @ManyToOne(optional=false, cascade=CascadeType.ALL)

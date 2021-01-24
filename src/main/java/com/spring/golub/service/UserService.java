@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Slf4j
@@ -38,6 +39,7 @@ public class UserService {
                     .email(userRegDTO.getEmail())
                     .password(encodePassword(userRegDTO.getPassword()))
                     .role(RoleType.ROLE_USER)
+                    .balance(new BigDecimal(0.0))
                     .build();
             userRepository.save(user);
         } catch (Exception ex) {

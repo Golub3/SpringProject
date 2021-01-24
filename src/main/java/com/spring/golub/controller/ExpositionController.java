@@ -21,30 +21,27 @@ import java.time.LocalDateTime;
 
 @Slf4j
 @Controller
-//@RequestMapping("/expositions")
+@RequestMapping("/expositions")
 public class ExpositionController {
     private static final String EXPOSITIONS_PAGE = "exposition_page/expositions.html";
-    private final ScheduleService scheduleService;
+    @Autowired private ScheduleService scheduleService;
+    @Autowired private ExpositionService expositionService;
 
-    @Autowired
-    public ExpositionController(ScheduleService scheduleService) {
-        this.scheduleService = scheduleService;
-    }
-
-    @GetMapping("/showNewScheduleForm")
-    public String showNewScheduleForm(Model model) {
+    @GetMapping("/showNewExpositionForm")
+    public String showNewExpositionForm(Model model) {
         // create model attribute to bind form data
-        Schedule schedule = new Schedule();
-        model.addAttribute("schedule", schedule);
+        Exposition exposition = new Exposition();
+        model.addAttribute("exposition", exposition);
         return "exposition_page/new_exposition.html";
     }
 
-    @PostMapping("/saveSchedule")
-    public String saveSchedule(@ModelAttribute("schedule") Schedule schedule) {
+    @PostMapping("/saveExposition")
+    public String saveExposition(@ModelAttribute("exposition") Exposition exposition) {
         // save schedule to database
-        scheduleService.saveSchedule(schedule);
-        return "redirect:/users";
+        expositionService.saveExposition(exposition);
+        return "redirect:/schedules";
     }
+
 
     @GetMapping("/expositions")
     public String getExpositionPage(Model model, @PageableDefault(size = 4) Pageable pageable) {

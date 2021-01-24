@@ -3,6 +3,8 @@ package com.spring.golub.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,4 +37,10 @@ public class User {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private RoleType role;
+
+    @Column(name = "balance", columnDefinition = "decimal(19,2) default 0.0")
+    private BigDecimal balance;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Ticket> tickets;
 }

@@ -19,10 +19,10 @@ public class ErrorController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(Exception.class)
-    public String handleException(Exception ex) {
-        return ERROR_PAGE;
-    }
+//    @ExceptionHandler(Exception.class)
+//    public String handleException(Exception ex) {
+//        return ERROR_PAGE;
+//    }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public String handleIllegalArgumentException(IllegalArgumentException ex) {
@@ -36,6 +36,5 @@ public class ErrorController {
         model.addAttribute("user", new UserRegistrationDTO());
         return "registration_page/registration_form.html";
     }
-    
 
 }

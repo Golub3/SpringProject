@@ -15,6 +15,8 @@
 <div class="container my-2">
     <h1 th:text="#{expositions.general}">Exposition Schedule</h1>
 
+    <a th:href = "@{/schedules/showNewScheduleForm}" class="btn btn-primary btn-sm mb-3"> Add Exposition Schedule </a>
+    <a th:href = "@{/expositions/showNewExpositionForm}" class="btn btn-primary btn-sm mb-3"> Add Exposition </a>
     <table border="1" class="table table-striped table-responsive-md">
         <thead>
         <tr>
