@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Exposition Schedule</title>
+
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<header th:insert="parts/header.html :: header(module='schedules')">...
+</header>
+
+<div class="container my-2">
+    <h1 th:text="#{expositions.general}">Exposition Schedule</h1>
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>
+                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=exposition.theme&sortDir=' + ${reverseSortDir}}"
+                   th:text="#{expositions.theme}">
+                    theme</a>
+            </th>
+            <th>
+                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=hall.name&sortDir=' + ${reverseSortDir}}"
+                   th:text="#{expositions.name}">
+                    hall</a>
+            </th>
+            <th th:text="#{expositions.date}">
+<!--                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir}}">-->
+                    date</a>
+            </th>
+            <th th:text="#{expositions.time_start}">
+<!--                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=time_start&sortDir=' + ${reverseSortDir}}">-->
+                    time_start</a>
+            </th>
+            <th th:text="#{expositions.time_end}">
+<!--                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=time_end&sortDir=' + ${reverseSortDir}}">-->
+                    time_end</a>
+            </th>
+            <th>
+                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=exposition.price&sortDir=' + ${reverseSortDir}}"
+                   th:text="#{expositions.price}">
+                    price</a>
+            </th>
+            <th> Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="e : ${listSchedules}">
+            <td th:text="${e.exposition.theme}"></td>
+            <td th:text="${e.hall.name}"></td>
+            <td th:text="${e.date}"></td>
+            <td th:text="${e.time_start}"></td>
+            <td th:text="${e.time_end}"></td>
+            <td th:text="${e.exposition.price}"></td>
+            <!--             <td>   <a th:href="@{/deleteSchedule/{id}(id=${e.id})}" class="btn btn-danger">Delete</a>-->
+            <!--            </td>-->
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="container-sm" th:insert="parts/epager.html :: epager(${prevPage}, ${nextPage}, ${limit})">...
+    </div>
+
+
+</div>
+<script src="/static/js/jquery-3.5.1.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>

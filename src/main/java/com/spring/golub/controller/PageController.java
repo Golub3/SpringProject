@@ -5,13 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PageController {
-    @RequestMapping("/")
+    @RequestMapping("/home")
     public String mainPage() {
-        return "index.html";
+        return "home_page/home.html";
     }
 
-    @RequestMapping("/all_user")
-    public String userPage() {
-        return "users/users.html";
-    }
 }
