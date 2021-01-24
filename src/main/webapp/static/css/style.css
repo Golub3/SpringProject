@@ -1,0 +1,15 @@
+.card {
+    max-width: 500px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    margin: 0 auto 30px;
+}
+
+.navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.logout {
+    margin-left: 5px;
+    margin-right: 5px;
+}

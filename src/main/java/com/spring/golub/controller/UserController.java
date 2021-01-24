@@ -26,13 +26,12 @@ public class UserController {
 
     @GetMapping()
     public String getUsersPage(Model model,
-                               @PageableDefault(sort = {"id"}, size = 2) Pageable pageable) {
+                               @PageableDefault(sort = {"id"}, size = 4) Pageable pageable) {
         Page<User> userPage = userService.getAllUsers(pageable);
         Pageable currentPageable = userPage.getPageable();
         int currentPageNum = currentPageable.getPageNumber();
         int prevPage = currentPageNum - 1;
         int nextPage = currentPageNum + 1;
-
         model.addAttribute("users", userPage.getContent());
         model.addAttribute("currentPage", currentPageNum + 1);
         model.addAttribute("limit", currentPageable.getPageSize());
@@ -41,7 +40,6 @@ public class UserController {
         model.addAttribute("totalPages", userPage.getTotalPages());
         model.addAttribute("hasPrev", userPage.hasPrevious());
         model.addAttribute("hasNext", userPage.hasNext());
-
         return USERS_PAGE;
     }
 }

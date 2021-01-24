@@ -25,7 +25,6 @@ public class UserRegistrationDTO {
     @Email(message = "{validation.error.email.invalid}")
     private String email;
 
-
     @Size(min = 8, max = 40, message = "{validation.error.password.size}")
     private String password;
 }
