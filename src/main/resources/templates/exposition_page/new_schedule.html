@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>New Schedule</title>
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css"
+		  crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h1>Create New Exposition Schedule</h1>
+		<hr>
+		<h2>Save exposition schedule</h2>
+
+		<form action="#" th:action="@{/schedules/saveSchedule}" th:object="${schedule}"
+			method="POST">
+
+			<input type="time" th:field="*{time_start}"
+				placeholder="Time start" class="form-control mb-4 col-4">
+
+			<input type="time" th:field="*{time_end}"
+				placeholder="Time end" class="form-control mb-4 col-4">
+
+			<input type="date" th:field="*{date}"
+				placeholder="Date" class="form-control mb-4 col-4">
+
+			<select th:field="*{hall}">
+				<option value="">Select Hall</option>
+				<option th:each="hall : ${halls}" th:value="${hall.id_hall}" th:text="${hall.name}"></option>
+			</select>
+
+			<select th:field="*{exposition}">
+				<option value="">Select Theme</option>
+				<option th:each="exposition : ${expositions}" th:value="${exposition.id_exp}" th:text="${exposition.theme}"></option>
+			</select>
+
+				<button type="submit" class="btn btn-info col-2"> Save Exposition</button>
+		</form>
+
+		<hr>
+
+<!--		<a th:href = "@{/}"> Back to Expositions List</a>-->
+	</div>
+</body>
+</html>
