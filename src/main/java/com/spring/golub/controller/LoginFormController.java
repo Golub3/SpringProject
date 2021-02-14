@@ -50,7 +50,7 @@ public class LoginFormController {
 
     @GetMapping()
     public String getLoginPage(@ModelAttribute("user") UserLoginDTO user, Principal principal) {
-        if (principal != null) return "redirect:/users?page=0&size=4";
+        if (principal != null) return "redirect:/schedules/";
         return LOGIN_FORM;
     }
 

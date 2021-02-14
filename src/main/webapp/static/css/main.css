@@ -1,0 +1,79 @@
+/*header style*/
+.body{
+    background-image: url('../image/fon2.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+}
+
+.overlay{
+    position: fixed; /* Sit on top of the page content */
+    /*display: none; !* Hidden by default *!*/
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(244, 244, 244, 0.79);
+    z-index: 0;
+}
+
+.description{
+    position: absolute;
+    top: 30%;
+    margin: auto;
+    padding: 2em;
+}
+
+.description h1, span{
+    color: darkblue ;
+}
+.description p{
+    color:#666;
+    font-size: 20px;
+    width: 50%;
+    line-height: 1.5;
+}
+.description button{
+    border:1px  solid darkslategrey;
+    background: #8EC0E4;
+    color:#fff;
+}
+
+/*lang*/
+.lang-icon {
+    width: 30px !important;
+}
+
+.lang-icon:active {
+    transform: rotate(-10deg);
+}
+
+
+.text-area{
+    width: 100% !important;
+}
+
+.card {
+    max-width: 500px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    margin: 0 auto 30px;
+}
+
+.navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 1;
+}
+
+.logout {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/*form*/
+.form-title{
+    width: 150%;
+}
