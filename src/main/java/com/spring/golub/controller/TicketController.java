@@ -1,17 +1,15 @@
 package com.spring.golub.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Slf4j
 @Controller
-public class PageController {
-    @RequestMapping("/")
-    public String main() {
-        return "main_page/main.html";
-    }
-
-    @RequestMapping("/home")
-    public String mainPage() {
+@RequestMapping()
+public class TicketController {
+    @RequestMapping("/balance")
+    public String balance() {
         return "home_page/home.html";
     }
 }

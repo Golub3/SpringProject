@@ -38,7 +38,7 @@ public class UserService {
                     .lastName(userRegDTO.getLastName())
                     .email(userRegDTO.getEmail())
                     .password(encodePassword(userRegDTO.getPassword()))
-                    .role(RoleType.ROLE_USER)
+                    .role(RoleType.USER)
                     .balance(new BigDecimal(0.0))
                     .build();
             userRepository.save(user);
@@ -46,7 +46,6 @@ public class UserService {
             log.info("{This Email already exists}");
             throw new IllegalEmailException(ex);
         }
-
     }
 
     private static String encodePassword(String password) {

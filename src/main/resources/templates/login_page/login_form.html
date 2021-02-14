@@ -36,7 +36,7 @@
                            class="form-control"
                            th:field="*{email}"
                            id="inputEmail"
-                           placeholder="Email"
+                           th:placeholder="#{input.email}"
                            required
                     >
                     <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
@@ -49,7 +49,7 @@
                            class="form-control"
                            th:field="*{password}"
                            id="inputPassword"
-                           placeholder="Password"
+                           th:placeholder="#{input.password}"
                            required
                     >
                     <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">

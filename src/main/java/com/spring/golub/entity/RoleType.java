@@ -3,8 +3,8 @@ package com.spring.golub.entity;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum RoleType implements GrantedAuthority {
-    ROLE_ADMIN,
-    ROLE_USER;
+    ADMIN,
+    USER;
 
 
     @Override

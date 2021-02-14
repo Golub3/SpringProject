@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
@@ -14,7 +14,7 @@
         </button>
         <div id="navbar-collapse" class="navbar">
 <!--            <div id="navbar-collapse" class="navbar-collapse collapse nav-pills">-->
-            <a class="navbar-brand" href="!">Exhibition center</a>
+            <a class="navbar-brand" href="/">Exhibition center</a>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#" th:href="@{/home}"
@@ -37,6 +37,7 @@
 <!--                        Expositions-->
 <!--                    </a>-->
 <!--                </li>-->
+                <div sec:authorize="hasRole('ADMIN')">
                 <li class="nav-item">
                     <a class="nav-link" href="#" th:href="@{/users?page=0&size=4}"
                        th:classappend="${module == 'users' ? 'active' : ''}"
@@ -44,6 +45,7 @@
                         Users
                     </a>
                 </li>
+                </div>
             </ul>
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item" th:if="${#authorization.expression('!isAuthenticated()')}">

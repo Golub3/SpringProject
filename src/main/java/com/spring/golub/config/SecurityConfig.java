@@ -29,7 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/css/**","/expositions", "/js/**", "/static/**", "/register", "/login", "/logout", "/expositions", "/expositions/**")
+                .antMatchers("/users**", "/schedules", "/schedules/**").hasAuthority("ADMIN")
+                .antMatchers("/schedules", "/schedules/**").hasAuthority("USER")
+            .antMatchers("/css/**", "/js/**", "/static/**", "/register", "/login", "/logout")
                 .permitAll()
             .anyRequest()
                 .authenticated()
@@ -37,13 +39,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
-                .defaultSuccessUrl("/users", true)
+                .defaultSuccessUrl("/schedules", true)
                 .permitAll()
             .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .permitAll();
-
+//                .and()
+//                .headers()
+//                .cacheControl().disable();
     }
 
     @Bean

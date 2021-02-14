@@ -19,8 +19,9 @@ public class Ticket {
     @Column(name = "ticket_id", nullable = false)
     private Long ticket_id;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_exp", nullable = false)
+    @OneToOne(cascade =  CascadeType.ALL,
+            mappedBy = "ticket")
+    @JoinColumn(name = "id_exp")
     private Exposition exposition;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)

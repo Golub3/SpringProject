@@ -40,7 +40,7 @@ public class LoginFormController {
                 return LOGIN_FORM;
             }
             log.info("successful login");
-            return "redirect:/users/";
+            return "redirect:/schedules/";
         } else {
             log.error("binding res error");
             model.addAttribute("error", "validation");

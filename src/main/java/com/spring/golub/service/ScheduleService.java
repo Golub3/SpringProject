@@ -6,18 +6,20 @@ import com.spring.golub.repository.ExpositionRepository;
 import com.spring.golub.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
-    private final ScheduleRepository scheduleRepository;
+    @Autowired private ScheduleRepository scheduleRepository;
 
     public Page<Schedule> getAllSchedules(Pageable pageable) {
         return scheduleRepository.findAll(pageable);
@@ -27,6 +29,22 @@ public class ScheduleService {
         this.scheduleRepository.save(schedule);
     }
 
+
+    public Page<Schedule> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection,
+                                        LocalDate dateStart, LocalDate dateEnd) {
+
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        Page<Schedule> list = scheduleRepository.getAllBetweenDates(dateStart, dateEnd, pageable);
+//local dates delete
+//        long start = pageable.getOffset();
+//        long end = (start + pageable.getPageSize()) > list.size() ? list.size() : (start + pageable.getPageSize());
+//
+//        return new PageImpl<Schedule>(list.subList((int)start, (int)end), pageable, list.size());
+        return list;
+    }
 
     public Page<Schedule> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :

@@ -8,24 +8,25 @@
 </head>
 <body>
 <div class="container">
-    <h1>Create New Exposition</h1>
+    <h1 th:text="#{button.create.exposition}">Create New Exposition</h1>
     <hr>
-    <h2>Save exposition</h2>
+    <h2 th:text="#{button.save.exposition}">Save exposition</h2>
 
     <form action="#" th:action="@{/expositions/saveExposition}" th:object="${exposition}"
           method="POST">
         <input type="text" th:field="*{theme}"
-               placeholder="Theme" class="form-control mb-4 col-4">
+               th:placeholder="#{theme}" class="form-control mb-4 col-4">
 
         <input type="text" th:field="*{price}"
-               placeholder="Price" class="form-control mb-4 col-4">
+               th:placeholder="#{price}" class="form-control mb-4 col-4">
 
-        <button type="submit" class="btn btn-info col-2"> Save Exposition</button>
+        <button type="submit" class="btn btn-info col-2" th:text="#{button.save.exposition}"> Save Exposition</button>
     </form>
 
     <hr>
-
-    <!--		<a th:href = "@{/}"> Back to Expositions List</a>-->
+    <form method="get" action="/schedules">
+        <button type="submit" th:text="#{button.back}">Back to Expositions List</button>
+    </form>
 </div>
 </body>
 </html>

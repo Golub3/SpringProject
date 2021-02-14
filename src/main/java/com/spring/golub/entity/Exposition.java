@@ -27,12 +27,10 @@ public class Exposition {
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
-            mappedBy = "exposition")
+    @OneToOne()
     private Ticket ticket;
 
-    @OneToMany(mappedBy = "exposition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "exposition", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Schedule> daySchedule;
 }
