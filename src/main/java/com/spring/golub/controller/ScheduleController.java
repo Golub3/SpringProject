@@ -18,13 +18,16 @@ import java.time.LocalDate;
 
 @Slf4j
 @Controller
+@SessionAttributes(value = {"sortField", "sortDir", "dates"})
 @RequestMapping("/schedules")
 public class ScheduleController {
     private static final String EXPOSITIONS_PAGE = "exposition_page/schedules.html";
-    @Autowired private ScheduleService scheduleService;
-    @Autowired private ExpositionService expositionService;
-    @Autowired private HallService hallService;
-    private DateDTO datesTemp = new DateDTO("2021-01-01", "2021-05-01");
+    @Autowired
+    private ScheduleService scheduleService;
+    @Autowired
+    private ExpositionService expositionService;
+    @Autowired
+    private HallService hallService;
 
     @GetMapping()
     public String viewHomePage(Model model) {
@@ -50,28 +53,25 @@ public class ScheduleController {
 
     @RequestMapping(value = "/delete_schedule/{id}", method = RequestMethod.GET)
     public String handleDeleteSchedule(@PathVariable String id) {
-//        System.out.println(id);
-//        System.out.println("test");
         return "redirect:/schedules";
     }
 
     @RequestMapping("/page/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-                                @RequestParam("sortField") String sortField,
-                                @RequestParam("sortDir") String sortDir,
+                                @RequestParam(value = "sortField", required = false) String sortField,
+                                @RequestParam(value = "sortDir", required = false) String sortDir,
                                 @ModelAttribute("dates") @Valid DateDTO dates,
                                 Model model) {
+        if (sortField != null) {
+            model.addAttribute("sortField", sortField).addAttribute("sortDir", sortDir);
+        } else {
+            sortField = (String) model.getAttribute("sortField");
+            sortDir = (String) model.getAttribute("sortDir");
+        }
 
-        int pageSize = 5;
-        if (dates.getDateStart() == null){
-            dates = datesTemp;
-        } else datesTemp = dates;
-        log.info(dates.toString());
-
-        Page<Schedule> page = scheduleService.findPaginated(pageNo, pageSize, sortField, sortDir,
+        Page<Schedule> page = scheduleService.findPaginated(pageNo, 5, sortField, sortDir,
                 LocalDate.parse(dates.getDateStart()), LocalDate.parse(dates.getDateEnd()));
         log.info(page.toString());
-//        DateDTO dates = new DateDTO(LocalDate.parse(dateStart), LocalDate.parse(dateEnd));
         //BUILDER ///ADD DATA TO DTO
         model.addAttribute("currentPage", pageNo).addAttribute("totalPages", page.getTotalPages())
                 .addAttribute("totalItems", page.getTotalElements()).addAttribute("prevPage", pageNo - 1)
@@ -82,25 +82,5 @@ public class ScheduleController {
                 .addAttribute("dateEnd", dates.getDateEnd()).addAttribute("listSchedules", page.getContent());
         return "exposition_page/schedules.html";
     }
-
-//    @GetMapping("/page/{pageNo}")
-//    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-//                                @RequestParam("sortField") String sortField,
-//                                @RequestParam("sortDir") String sortDir,
-//                                Model model) {
-//        int pageSize = 5;
-//        Page<Schedule> page = scheduleService.findPaginated(pageNo, pageSize, sortField, sortDir);
-//        DateDTO dates = new DateDTO(LocalDate.parse("2021-01-01"), LocalDate.parse("2030-01-01"));
-//        model.addAttribute("currentPage", pageNo).addAttribute("totalPages", page.getTotalPages())
-//                .addAttribute("totalItems", page.getTotalElements()).addAttribute("prevPage", pageNo - 1)
-//                .addAttribute("nextPage", pageNo + 1).addAttribute("sortField", sortField)
-//                .addAttribute("sortDir", sortDir).addAttribute("hasPrev", page.hasPrevious())
-//                .addAttribute("hasNext", page.hasNext())
-//                .addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc").addAttribute("dates", dates)
-//                .addAttribute("dateStart", dates.getDateStart()).addAttribute("dateEnd", dates.getDateEnd());
-//
-//        model.addAttribute("listSchedules", page.getContent());
-//        return "exposition_page/schedules.html";
-//    }
 
 }

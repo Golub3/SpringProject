@@ -38,11 +38,7 @@ public class ScheduleService {
 
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         Page<Schedule> list = scheduleRepository.getAllBetweenDates(dateStart, dateEnd, pageable);
-//local dates delete
-//        long start = pageable.getOffset();
-//        long end = (start + pageable.getPageSize()) > list.size() ? list.size() : (start + pageable.getPageSize());
-//
-//        return new PageImpl<Schedule>(list.subList((int)start, (int)end), pageable, list.size());
+
         return list;
     }
 
