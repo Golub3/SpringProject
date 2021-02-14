@@ -37,11 +37,11 @@ public class Schedule {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    @ManyToOne(optional=false, cascade=CascadeType.ALL)
+    @ManyToOne(optional=false)
     @JoinColumn(name = "id_h")
     private Hall hall;
 
-    @ManyToOne(optional=false, cascade=CascadeType.ALL)
+    @ManyToOne(optional=false)
     @JoinColumn(name = "id_e")
     private Exposition exposition;
 }

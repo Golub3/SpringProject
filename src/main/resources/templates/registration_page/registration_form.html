@@ -27,7 +27,7 @@
                            class="form-control"
                            th:field="*{firstName}"
                            id="inputFirstName"
-                           placeholder="First name"
+                           th:placeholder="#{input.firstname}"
                            required
                     >
                     <div class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
@@ -40,7 +40,7 @@
                            class="form-control"
                            th:field="*{lastName}"
                            id="inputLastName"
-                           placeholder="Last name"
+                           th:placeholder="#{input.lastname}"
                            required
                     >
                     <div class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
@@ -53,7 +53,7 @@
                            class="form-control"
                            th:field="*{email}"
                            id="inputEmail"
-                           placeholder="Email"
+                           th:placeholder="#{input.email}"
                            required
                     >
                     <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
@@ -66,7 +66,7 @@
                            class="form-control"
                            th:field="*{password}"
                            id="inputPassword"
-                           placeholder="Password"
+                           th:placeholder="#{input.password}"
                            required
                     >
                     <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
