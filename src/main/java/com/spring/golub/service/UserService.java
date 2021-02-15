@@ -31,9 +31,8 @@ public class UserService {
                 userLoginDTO.getEmail(), encodePassword(userLoginDTO.getPassword()));
     }
 
-    public Optional<User> findByUserLogin(User user) {
-        return userRepository.findByEmailAndPassword(
-                user.getEmail(), encodePassword(user.getPassword()));
+    public Optional<User> findByUserLogin(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public void saveNewUser(UserRegistrationDTO userRegDTO) {
@@ -55,5 +54,9 @@ public class UserService {
 
     private static String encodePassword(String password) {
         return new BCryptPasswordEncoder().encode(password);
+    }
+
+    public void alterBalanceById(BigDecimal balance, Long user_id){
+        userRepository.alterBalanceById(balance, user_id);
     }
 }

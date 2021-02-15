@@ -19,10 +19,9 @@ public class Ticket {
     @Column(name = "ticket_id", nullable = false)
     private Long ticket_id;
 
-    @OneToOne(cascade =  CascadeType.ALL,
-            mappedBy = "ticket")
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_exp")
-    private Exposition exposition;
+    private Exposition exp;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id")

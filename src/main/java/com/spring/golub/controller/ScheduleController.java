@@ -3,12 +3,15 @@ package com.spring.golub.controller;
 import com.spring.golub.dto.DateDTO;
 import com.spring.golub.dto.UserLoginDTO;
 import com.spring.golub.entity.Schedule;
+import com.spring.golub.entity.UserPrincipal;
 import com.spring.golub.service.ExpositionService;
 import com.spring.golub.service.HallService;
 import com.spring.golub.service.ScheduleService;
+import com.spring.golub.service.TicketService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -31,6 +35,8 @@ public class ScheduleController {
     private ExpositionService expositionService;
     @Autowired
     private HallService hallService;
+    @Autowired
+    private TicketService ticketService;
 
     @GetMapping()
     public String viewHomePage(Model model) {
@@ -45,6 +51,19 @@ public class ScheduleController {
         model.addAttribute("halls", hallService.getAll());
         model.addAttribute("expositions", expositionService.getAll());
         return "exposition_page/new_schedule.html";
+    }
+
+    @GetMapping("/page/{pageNo}/buyTicket")
+    public String buyTicket(Authentication authentication, HttpSession session,
+                            @RequestParam(value = "id", required = false) String id) {
+        Optional.ofNullable(authentication)
+                .ifPresent(auth -> {
+                    UserPrincipal user = (UserPrincipal) auth.getPrincipal();
+                    session.setAttribute("balance",
+                            ticketService.ticketBuy(user.getUsername(),
+                            Long.parseLong(id)).toString());
+                });
+        return "redirect:/schedules/page/{pageNo}";
     }
 
     @PostMapping("/saveSchedule")
