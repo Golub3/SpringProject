@@ -3,6 +3,7 @@ package com.spring.golub.entity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -49,5 +50,13 @@ public class UserPrincipal implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Long getUserId() {
+        return user.getId();
+    }
+
+    public BigDecimal getBalance() {
+        return user.getBalance();
     }
 }

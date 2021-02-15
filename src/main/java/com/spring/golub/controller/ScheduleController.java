@@ -12,7 +12,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
 
@@ -62,6 +65,7 @@ public class ScheduleController {
                                 @RequestParam(value = "sortDir", required = false) String sortDir,
                                 @ModelAttribute("dates") @Valid DateDTO dates,
                                 Model model) {
+
         if (sortField != null) {
             model.addAttribute("sortField", sortField).addAttribute("sortDir", sortDir);
         } else {
@@ -71,7 +75,6 @@ public class ScheduleController {
 
         Page<Schedule> page = scheduleService.findPaginated(pageNo, 5, sortField, sortDir,
                 LocalDate.parse(dates.getDateStart()), LocalDate.parse(dates.getDateEnd()));
-        log.info(page.toString());
         //BUILDER ///ADD DATA TO DTO
         model.addAttribute("currentPage", pageNo).addAttribute("totalPages", page.getTotalPages())
                 .addAttribute("totalItems", page.getTotalElements()).addAttribute("prevPage", pageNo - 1)

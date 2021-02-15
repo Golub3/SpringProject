@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="ISO-8859-1">
     <title>Exposition Schedule</title>
@@ -14,13 +14,10 @@
 
 <div sec:authorize="hasAuthority('ADMIN')">
     <div class="container my-2">
-        <h1 th:text="#{expositions.general}">Admin Exposition Schedule</h1>
-
-        <a th:href="@{/schedules/showNewScheduleForm}" class="btn btn-primary btn-sm mb-3" th:text="#{schedule.add}"> Add Exposition Schedule </a>
-        <a th:href="@{/expositions/showNewExpositionForm}" class="btn btn-primary btn-sm mb-3" th:text="#{expositions.add}"> Add Exposition </a>
+        <h1 th:text="#{expositions.general}">Exposition Schedule</h1>
 
         <form action="#" th:action="@{'/schedules/page/' + ${currentPage} +
-                   '?sortField=exposition.theme&sortDir=' + ${reverseSortDir}}" th:object="${dates}"
+                    '?sortField=exposition.theme&sortDir=asc'}" th:object="${dates}"
               method="POST">
 
             <input type="date" th:field="*{dateStart}"
@@ -35,39 +32,28 @@
             <thead>
             <tr>
                 <th>
-<!--                    <a th:href="@{'/schedules/page/' + ${currentPage} + '/' + ${dateStart} + '/' + ${dateEnd} +-->
-<!--                    '?sortField=exposition.theme&sortDir=' + ${reverseSortDir}}"-->
                     <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=exposition.theme&sortDir=' + ${reverseSortDir}}"
                        th:text="#{expositions.theme}">
                         theme</a>
                 </th>
-                <th>
-<!--                    <a th:href="@{'/schedules/page/' + ${currentPage} + '/' + ${dateStart} + '/' + ${dateEnd} +-->
-<!--                    '?sortField=hall.name&sortDir=' + ${reverseSortDir}}"-->
-                    <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=hall.name&sortDir=' + ${reverseSortDir}}"
-                       th:text="#{expositions.name}">
-                        hall</a>
+                <th th:text="#{expositions.name}">
+                    hall
                 </th>
                 <th th:text="#{expositions.date}">
-                    <!--                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir}}">-->
-                    date</a>
+                    date
                 </th>
                 <th th:text="#{expositions.time_start}">
-                    <!--                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=time_start&sortDir=' + ${reverseSortDir}}">-->
-                    time_start</a>
+                    time_start
                 </th>
                 <th th:text="#{expositions.time_end}">
-                    <!--                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=time_end&sortDir=' + ${reverseSortDir}}">-->
-                    time_end</a>
+                    time_end
                 </th>
                 <th>
-<!--                    <a th:href="@{'/schedules/page/' + ${currentPage} + '/' + ${dateStart} + '/' + ${dateEnd} +-->
-<!--                    '?sortField=exposition.price&sortDir=' + ${reverseSortDir}}"-->
                     <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=exposition.price&sortDir=' + ${reverseSortDir}}"
                        th:text="#{expositions.price}">
                         price</a>
                 </th>
-                <th th:text="#{actions}">Actions</th>
+                <th> Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -78,8 +64,8 @@
                 <td th:text="${e.time_start}"></td>
                 <td th:text="${e.time_end}"></td>
                 <td th:text="${e.exposition.price}"></td>
-                             <td>   <a th:href="@{/delete_schedule/${e.id}}" class="btn btn-danger" th:text="#{button.delete}">Delete</a>
-                            </td>
+                <td>   <a th:href="@{/delete_schedule/${e.id}}" class="btn btn-danger" th:text="#{button.delete}">Delete</a>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -109,34 +95,23 @@
             <thead>
             <tr>
                 <th>
-                    <!--                    <a th:href="@{'/schedules/page/' + ${currentPage} + '/' + ${dateStart} + '/' + ${dateEnd} +-->
-                    <!--                    '?sortField=exposition.theme&sortDir=' + ${reverseSortDir}}"-->
                     <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=exposition.theme&sortDir=' + ${reverseSortDir}}"
                        th:text="#{expositions.theme}">
                         theme</a>
                 </th>
-                <th>
-                    <!--                    <a th:href="@{'/schedules/page/' + ${currentPage} + '/' + ${dateStart} + '/' + ${dateEnd} +-->
-                    <!--                    '?sortField=hall.name&sortDir=' + ${reverseSortDir}}"-->
-                    <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=hall.name&sortDir=' + ${reverseSortDir}}"
-                       th:text="#{expositions.name}">
-                        hall</a>
+                <th th:text="#{expositions.name}">
+                    hall
                 </th>
                 <th th:text="#{expositions.date}">
-                    <!--                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir}}">-->
-                    date</a>
+                    date
                 </th>
                 <th th:text="#{expositions.time_start}">
-                    <!--                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=time_start&sortDir=' + ${reverseSortDir}}">-->
-                    time_start</a>
+                    time_start
                 </th>
                 <th th:text="#{expositions.time_end}">
-                    <!--                <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=time_end&sortDir=' + ${reverseSortDir}}">-->
-                    time_end</a>
+                    time_end
                 </th>
                 <th>
-                    <!--                    <a th:href="@{'/schedules/page/' + ${currentPage} + '/' + ${dateStart} + '/' + ${dateEnd} +-->
-                    <!--                    '?sortField=exposition.price&sortDir=' + ${reverseSortDir}}"-->
                     <a th:href="@{'/schedules/page/' + ${currentPage} + '?sortField=exposition.price&sortDir=' + ${reverseSortDir}}"
                        th:text="#{expositions.price}">
                         price</a>

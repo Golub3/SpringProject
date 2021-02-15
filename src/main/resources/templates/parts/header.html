@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
@@ -37,7 +37,7 @@
 <!--                        Expositions-->
 <!--                    </a>-->
 <!--                </li>-->
-                <div sec:authorize="hasRole('ADMIN')">
+                <div sec:authorize="hasAuthority('ADMIN')">
                 <li class="nav-item">
                     <a class="nav-link" href="#" th:href="@{/users?page=0&size=4}"
                        th:classappend="${module == 'users' ? 'active' : ''}"
@@ -73,6 +73,11 @@
                           th:action="@{/logout}"></form>
                 </li>
             </ul>
+        </div>
+        <div sec:authorize="hasAuthority('USER')">
+            <a class="navbar-brand js-scroll-trigger" th:text="#{navigation.section.balance}+${session.balance}">
+            <h2>">Balance : </h2>
+            </a>
         </div>
         <div class="dropdown">
             <button class="btn btn-outline-light btn dropdown-toggle" type="button"

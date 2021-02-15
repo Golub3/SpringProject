@@ -1,5 +1,6 @@
 package com.spring.golub.controller;
 
+import com.sun.javaws.IconUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.security.Principal;
@@ -10,11 +11,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.spring.golub.dto.UserLoginDTO;
 import com.spring.golub.service.UserService;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Slf4j
 @Controller
+@SessionAttributes(value = "balance")
 @RequestMapping("/login")
 public class LoginFormController {
     public static final String LOGIN_FORM = "login_page/login_form.html";
@@ -40,7 +45,7 @@ public class LoginFormController {
                 return LOGIN_FORM;
             }
             log.info("successful login");
-            return "redirect:/schedules/";
+            return "redirect:/home/";
         } else {
             log.error("binding res error");
             model.addAttribute("error", "validation");
@@ -50,7 +55,7 @@ public class LoginFormController {
 
     @GetMapping()
     public String getLoginPage(@ModelAttribute("user") UserLoginDTO user, Principal principal) {
-        if (principal != null) return "redirect:/schedules/";
+        if (principal != null) return "redirect:/home/";
         return LOGIN_FORM;
     }
 
