@@ -31,6 +31,11 @@ public class UserService {
                 userLoginDTO.getEmail(), encodePassword(userLoginDTO.getPassword()));
     }
 
+    public Optional<User> findByUserLogin(User user) {
+        return userRepository.findByEmailAndPassword(
+                user.getEmail(), encodePassword(user.getPassword()));
+    }
+
     public void saveNewUser(UserRegistrationDTO userRegDTO) {
         try {
             User user = User.builder()

@@ -29,7 +29,7 @@ public class RegistrationFormController {
 
     @GetMapping()
     public String getRegistrationPage(@ModelAttribute("user") UserRegistrationDTO user, Principal principal) {
-        if (principal != null) return "redirect:/schedules/";
+        if (principal != null) return "redirect:/home/";
         return REG_FORM;
     }
 
@@ -43,6 +43,6 @@ public class RegistrationFormController {
         }
         userService.saveNewUser(user);
         log.info("{}", user);
-        return "redirect:/schedules/";
+        return "redirect:/home/";
     }
 }

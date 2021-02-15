@@ -29,9 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/users**", "/schedules", "/schedules/**").hasAuthority("ADMIN")
-                .antMatchers("/schedules", "/schedules/**").hasAuthority("USER")
-            .antMatchers("/css/**", "/js/**", "/image/**", "/static/**", "/register", "/login", "/logout", "/")
+                .antMatchers("/users").hasAuthority("ADMIN")
+                .antMatchers("/schedules").hasAnyAuthority("USER", "ADMIN")
+            .antMatchers("/css/**", "/js/**", "/image/**", "/static/**", "/register", "/login", "/logout", "/",
+                    "/error")
                 .permitAll()
             .anyRequest()
                 .authenticated()
@@ -39,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
-                .defaultSuccessUrl("/schedules", true)
+                .defaultSuccessUrl("/home", true)
                 .permitAll()
             .and()
                 .logout()
