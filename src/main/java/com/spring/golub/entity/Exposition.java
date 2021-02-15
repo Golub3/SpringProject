@@ -27,8 +27,8 @@ public class Exposition {
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
-    @OneToOne()
-    private Ticket ticket;
+    @OneToMany(mappedBy = "exp", cascade = CascadeType.ALL)
+    private List<Ticket> ticket;
 
     @OneToMany(mappedBy = "exposition", cascade = CascadeType.ALL)
     @ToString.Exclude

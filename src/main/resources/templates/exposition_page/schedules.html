@@ -127,7 +127,9 @@
                 <td th:text="${e.time_start}"></td>
                 <td th:text="${e.time_end}"></td>
                 <td th:text="${e.exposition.price}"></td>
-                <td>   <a th:href="@{/buySchedule/{id}(id=${e.id})}" class="btn btn-danger">Buy</a>
+<!--                <td>   <a th:href="@{'/schedules/buyTicket?id=' + '${e.exposition.id_exp}'" class="btn btn-danger"-->
+                <td>   <a th:href="@{'/schedules/page/' + ${currentPage} + '/buyTicket?id=' + ${e.exposition.id_exp}}" class="btn btn-danger"
+                          th:text="#{button.buy}">Buy</a>
                 </td>
             </tr>
             </tbody>

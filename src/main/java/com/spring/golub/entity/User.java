@@ -41,6 +41,6 @@ public class User {
     @Column(name = "balance", columnDefinition = "decimal(19,2) default 0.0")
     private BigDecimal balance;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 }
