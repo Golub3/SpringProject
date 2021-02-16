@@ -1,7 +1,6 @@
 package com.spring.golub.controller;
 
 import com.spring.golub.dto.DateDTO;
-import com.spring.golub.dto.UserLoginDTO;
 import com.spring.golub.entity.Schedule;
 import com.spring.golub.entity.UserPrincipal;
 import com.spring.golub.service.ExpositionService;
@@ -15,8 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
