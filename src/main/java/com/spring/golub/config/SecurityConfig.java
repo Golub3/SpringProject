@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 .antMatchers("/users").hasAuthority("ADMIN")
-                .antMatchers("/schedules").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/schedules", "/home").hasAnyAuthority("USER", "ADMIN")
             .antMatchers("/css/**", "/js/**", "/image/**", "/static/**", "/register", "/login", "/logout", "/",
                     "/error")
                 .permitAll()
@@ -48,7 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .headers()
-                .cacheControl().disable();
+                .defaultsDisabled()
+                .cacheControl();
     }
 
     @Bean

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -33,6 +34,7 @@ public class TicketService {
      * @param email String.
      * @param id long.
      */
+    @Transactional
     public BigDecimal ticketBuy(String email, Long id) {
         BigDecimal balance = Objects.requireNonNull(userService.findByUserLogin(email).orElse(null)).getBalance();
         BigDecimal price = Objects.requireNonNull(expositionService.findById(id).orElse(null)).getPrice();
