@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Error</title>
+    </head>
+    <body>
+        <p>Some error!</p>
+        <form method="get" action="/home">
+            <button type="submit" th:text="#{button.back}">Back to Home</button>
+        </form>
+    </body>
+</html>
