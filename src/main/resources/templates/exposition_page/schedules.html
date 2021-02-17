@@ -15,7 +15,6 @@
 <div sec:authorize="hasAuthority('ADMIN')">
     <div class="container my-2">
         <h1 th:text="#{expositions.general}">Exposition Schedule</h1>
-
         <form action="#" th:action="@{'/schedules/page/' + ${currentPage} +
                     '?sortField=exposition.theme&sortDir=asc'}" th:object="${dates}"
               method="POST">
@@ -27,6 +26,8 @@
 
             <button type="submit" class="btn btn-info col-2" th:text="#{button.filter}">Filter</button>
         </form>
+        <a th:href="@{/schedules/showNewScheduleForm}" class="btn btn-primary btn-sm mb-3" th:text="#{schedule.add}"> Add Exposition Schedule </a>
+        <a th:href="@{/expositions/showNewExpositionForm}" class="btn btn-primary btn-sm mb-3" th:text="#{expositions.add}"> Add Exposition </a>
 
         <table border="1" class="table table-striped table-responsive-md">
             <thead>
