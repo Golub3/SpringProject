@@ -44,10 +44,9 @@ public class ExpositionController {
         Page<Schedule> expositionPage = scheduleService.getAllSchedules(pageable);
         Pageable currentPageable = expositionPage.getPageable();
         int currentPageNum = currentPageable.getPageNumber();
-        //no local
         int prevPage = currentPageNum - 1;
         int nextPage = currentPageNum + 1;
-        //need builder for model
+
         model.addAttribute("expositions", expositionPage.getContent()).addAttribute("currentPage", currentPageNum + 1)
                 .addAttribute("limit", currentPageable.getPageSize()).addAttribute("prevPage", prevPage)
                 .addAttribute("nextPage", nextPage).addAttribute("totalPages", expositionPage.getTotalPages())

@@ -91,7 +91,7 @@ public class ScheduleController {
 
         Page<Schedule> page = scheduleService.findPaginated(pageNo, 5, sortField, sortDir,
                 LocalDate.parse(dates.getDateStart()), LocalDate.parse(dates.getDateEnd()));
-        //BUILDER ///ADD DATA TO DTO
+
         model.addAttribute("currentPage", pageNo).addAttribute("totalPages", page.getTotalPages())
                 .addAttribute("totalItems", page.getTotalElements()).addAttribute("prevPage", pageNo - 1)
                 .addAttribute("nextPage", pageNo + 1).addAttribute("sortField", sortField)
